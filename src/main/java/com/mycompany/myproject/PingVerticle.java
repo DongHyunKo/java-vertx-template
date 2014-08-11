@@ -20,8 +20,12 @@ package com.mycompany.myproject;
 
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.eventbus.Message;
+import org.vertx.java.core.http.HttpServerRequest;
 import org.vertx.java.core.logging.Logger;
 import org.vertx.java.platform.Verticle;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentMap;
 
 /*
  * This is a simple Java verticle which receives `ping` messages on the event bus and sends back `pong` replies
@@ -30,20 +34,22 @@ import org.vertx.java.platform.Verticle;
  */
 public class PingVerticle extends Verticle {
 
-  public void start() {
 
-    final Logger logger = container.logger();
+    public void start() {
 
-    vertx.eventBus().registerHandler("ping-address", new Handler<Message<String>>() {
-      @Override
-      public void handle(Message<String> message) {
-        message.reply("pong!");
-        logger.info("Sent back pong");
-      }
-    });
+        final Logger logger = getContainer().logger();
+        vertx.eventBus().registerHandler("ping-address", new Handler<Message<String>>() {
+        @Override
+        public void handle(Message<String> message) {
+            message.reply("pong!");
+            logger.info("Sent back pong");
+        }
+        });
 
 
-    logger.info("PingVerticle started");
 
-  }
+
+
+        logger.info("PingVerticle started");
+    }
 }
