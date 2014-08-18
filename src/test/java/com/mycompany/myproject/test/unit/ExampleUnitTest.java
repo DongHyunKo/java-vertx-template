@@ -1,10 +1,10 @@
 package com.mycompany.myproject.test.unit;
 
-import com.mycompany.myproject.PingVerticle;
-import org.junit.Assert;
+
+import com.mycompany.myproject.HttpServerVerticle;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /*
  * Copyright 2013 Red Hat, Inc.
@@ -27,7 +27,7 @@ public class ExampleUnitTest {
 
     @Test
     public void testVerticle() {
-        PingVerticle vert = new PingVerticle();
+        HttpServerVerticle vert = new HttpServerVerticle();
 
         // Interrogate your classes directly....
 

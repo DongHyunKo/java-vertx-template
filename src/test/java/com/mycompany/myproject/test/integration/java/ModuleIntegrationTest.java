@@ -39,38 +39,36 @@ import static org.vertx.testtools.VertxAssert.*;
  */
 public class ModuleIntegrationTest extends TestVerticle {
 
-    @Test
-    public void testPing() {
-        container.logger().info("in testPing()");
-        vertx.eventBus().send("ping-address", "ping!", new Handler<Message<String>>() {
-            @Override
-            public void handle(Message<String> reply) {
-                container.logger().info("pong!");
-                assertEquals("pong!", reply.body());
-
-                /*
-                If we get here, the test is complete
-                You must always call `testComplete()` at the end. Remember that testing is *asynchronous* so
-                we cannot assume the test is complete by the time the test method has finished executing like
-                in standard synchronous tests
-                */
-                testComplete();
-            }
-        });
-    }
+//    @Test
+//    public void testPing() {
+//        container.logger().info("in testPing()");
+//        vertx.eventBus().send("ping-address", "ping!", new Handler<Message<String>>() {
+//            @Override
+//            public void handle(Message<String> reply) {
+//                container.logger().info("pong!");
+//                assertEquals("pong!", reply.body());
+//
+//                /*
+//                If we get here, the test is complete
+//                You must always call `testComplete()` at the end. Remember that testing is *asynchronous* so
+//                we cannot assume the test is complete by the time the test method has finished executing like
+//                in standard synchronous tests
+//                */
+//                testComplete();
+//            }
+//        });
+//    }
 
     @Test
     public void testHttpRequest() {
         container.logger().info( "in testHttpRequest");
-        vertx.createHttpClient().setPort(8080).setHost("localhost").getNow("/test", new Handler<HttpClientResponse>() {
+        vertx.createHttpClient().setPort(33081).setHost("localhost").getNow("/short", new Handler<HttpClientResponse>() {
             @Override
             public void handle(HttpClientResponse response) {
                 response.bodyHandler(new Handler<Buffer>() {
                     @Override
                     public void handle(Buffer data) {
-                        System.out.println("abcd");
                         System.out.println(data);
-
                         testComplete();
                     }
                 });
